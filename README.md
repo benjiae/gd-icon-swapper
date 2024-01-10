@@ -18,6 +18,10 @@ For this, you can either clone the repository (which will get you a .py file), o
 Copy your icons folder (located on ```Geometry Dash/Resources```) to the same directory as the script, then run it, it will give instructions
 
 ## Troubleshooting
+### The .exe doesn't open!
+Make sure to have the icons folder on the same directory (as mentioned above)
+
+### Literally any other thing:
 idk anymore man, i probably just fucked something up\
 Make an issue and i'll probably fix it
 
