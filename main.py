@@ -1,5 +1,6 @@
 import os
 
+print("")
 print("Thanks for trying this tool!")
 print("To find the icon IDs, you can use GDColon's page. (https://gdbrowser.com/iconkit/)")
 print("")
@@ -46,7 +47,4 @@ while True:
         print("Please, insert an integer.")
         continue
 
-print("DEBUGGING:")
-print("Mode: " + str(mode))
-print("replacingID: " + str(replacingID))
-print("replacedID: " + str(replacedID))
+print("")
