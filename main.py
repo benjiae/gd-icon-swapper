@@ -1,22 +1,17 @@
 import os
 import shutil
 
-path = "icons_test/"
-path_backup = "icons_test/backups/"
-
+path = "icons/"
+path_backup = path + "backups/"
 
 if not os.path.isdir(path):
-    print("no icons folder, creating one")
-    os.mkdir(path)
+    print("No icons folder found, please copy your icons folder to this directory (Geometry Dash/Resources/icons)")
+    exit
 
 if not os.path.isdir(path_backup):
     print("no backups folder, creating one")
     os.mkdir(path_backup)
 
-print("")
-print("Thanks for trying this tool!")
-print("To find the icon IDs, you can use GDColon's page. (https://gdbrowser.com/iconkit/)")
-print("")
 print("Select the gamemode you want:")
 print("1: Cube")
 print("2: Ship")
@@ -90,7 +85,8 @@ match mode:
     case 8:
         mode_string = "jetpack_"
 
-### Renaming the original files
+print("Moving original files to backups folder...")
+### Moving the original files to the backups folder
 os.rename(path + mode_string + replaced + ".png", path_backup + mode_string + replaced + ".png")
 os.rename(path + mode_string + replaced + ".plist", path_backup + mode_string + replaced + ".plist")
 
@@ -100,6 +96,7 @@ os.rename(path + mode_string + replaced + "-hd.plist", path_backup + mode_string
 os.rename(path + mode_string + replaced + "-uhd.png", path_backup + mode_string + replaced + "-uhd.png")
 os.rename(path + mode_string + replaced + "-uhd.plist", path_backup + mode_string + replaced + "-uhd.plist")
 
+print("Replacing original files with the other icon's ones...")
 ### Copying the replacement files
 
 shutil.copyfile(path + mode_string + replacing + ".png", path + mode_string + replaced + ".png")
@@ -111,6 +108,7 @@ shutil.copyfile(path + mode_string + replacing + "-hd.plist", path + mode_string
 shutil.copyfile(path + mode_string + replacing + "-uhd.png", path + mode_string + replaced + "-uhd.png")
 shutil.copyfile(path + mode_string + replacing + "-uhd.plist", path + mode_string + replaced + "-uhd.plist")
 
+print("Editing the plist files...")
 ### Editing the plist files
 
 ## low quality
@@ -130,7 +128,7 @@ with open(path + mode_string + replaced + "-hd.plist", 'r') as file:
 
 with open(path + mode_string + replaced + "-hd.plist", 'w') as file:
     file.write(filedata)
-    
+
 ## high quality
 with open(path + mode_string + replaced + "-uhd.plist", 'r') as file:
     filedata = file.read()
@@ -139,3 +137,6 @@ with open(path + mode_string + replaced + "-uhd.plist", 'r') as file:
 
 with open(path + mode_string + replaced + "-uhd.plist", 'w') as file:
     file.write(filedata)
+
+print("Done! copy the icons folder from this directory to the Resources folder.")
+exit
