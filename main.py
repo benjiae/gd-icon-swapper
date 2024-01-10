@@ -52,37 +52,34 @@ while True:
 
 print("")
 
-replaced = str(replaced_id)
-replacing = str(replacing_id)
-# Por ahora voy a copiar "player_01" a "player_02" y player_02 a player_02.bak
-if mode == 1:
-    if replaced_id <= 9:
-        os.rename(path + "/player_0" + replaced + ".png", path + "/player_0" + replaced + ".png.bak")
-        os.rename(path + "/player_0" + replaced + "-hd.png", path + "/player_0" + replaced + "-hd.png.bak")
-        os.rename(path + "/player_0" + replaced + "-uhd.png", path + "/player_0" + replaced + "-uhd.png.bak")
+if replacing_id <= 9:
+    replaced = "0" + str(replaced_id)
+else:
+    replaced = str(replaced_id)
 
-        os.rename(path + "/player_0" + replaced + ".plist", path + "/player_0" + replaced + ".plist.bak")
-        os.rename(path + "/player_0" + replaced + "-hd.plist", path + "/player_0" + replaced + "-hd.plist.bak")
-        os.rename(path + "/player_0" + replaced + "-uhd.plist", path + "/player_0" + replaced + "-uhd.plist.bak")
+match mode:
+    case 1:
+        mode_string = "player"
+    case 2:
+        mode_string = "ship"
+    case 3:
+        mode_string = "player_ball"
+    case 4:
+        mode_string = "bird"
+    case 5:
+        mode_string = "robot"
+    case 6:
+        mode_string = "spider"
+    case 7:
+        mode_string = "swing"
+    case 8:
+        mode_string = "jetpack"
 
-    elif replaced_id >= 10:
-        os.rename(path + "/player_" + replaced + ".png", path + "/player_" + replaced + ".png.bak")
-        os.rename(path + "/player_" + replaced + "-hd.png", path + "/player_" + replaced + "-hd.png" + ".bak")
-        os.rename(path + "/player_" + replaced + "-uhd.png", path + "/player_" + replaced + "-uhd.png" + ".bak")
-
-        os.rename(path + "/player_0" + replaced + ".plist", path + "/player_0" + replaced + ".plist.bak")
-        os.rename(path + "/player_0" + replaced + "-hd.plist", path + "/player_0" + replaced + "-hd.plist.bak")
-        os.rename(path + "/player_0" + replaced + "-uhd.plist", path + "/player_0" + replaced + "-uhd.plist.bak")
-"""""
-    if replacing_id <= 9 and replaced_id <= 9:
-      shutil.copy(path + "/player_0" + replacing, path + "/player_0", replaced)
-
-    elif replacing_id >= 10 and replaced_id >= 10:
-        shutil.copy(path + "/player_" + replacing, path + "/player_" + replaced)
-
-    elif replacing_id <= 9 and replaced_id >= 10:
-        shutil.copy(path + "/player_0" + replacing, path + "/player_" + replaced)
-
-    elif replacing_id >= 10 and replaced_id <= 9:
-        shutil.copy(path + "/player_" + replacing, path + "/player_0" + replaced)
-        """""
+    #png
+os.rename(path + "/" + mode_string + "_" + replaced + ".png", path + "/" + mode_string + "_" + replaced + ".png.bak")
+os.rename(path + "/" + mode_string + "_" + replaced + "-hd.png", path + "/" + mode_string + "_" + replaced + "-hd.png.bak")
+os.rename(path + "/" + mode_string + "_" + replaced + "-uhd.png", path + "/" + mode_string + "_" + replaced + "-uhd.png.bak")
+    #plist
+os.rename(path + "/" + mode_string + "_" + replaced + ".plist", path + "/" + mode_string + "_" + replaced + ".plist.bak")
+os.rename(path + "/" + mode_string + "_" + replaced + "-hd.plist", path + "/" + mode_string + "_" + replaced + "-hd.plist.bak")
+os.rename(path + "/" + mode_string + "_" + replaced + "-uhd.plist", path + "/" + mode_string + "_" + replaced + "-uhd.plist.bak")
