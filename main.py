@@ -1,4 +1,7 @@
 import os
+import shutil
+
+path = "icons_test"
 
 print("")
 print("Thanks for trying this tool!")
@@ -31,7 +34,7 @@ print("")
 
 while True:
     try:
-        replacingID = int(input("Insert the ID of the icon you want: "))
+        replacing_id = int(input("Insert the ID of the icon you want: "))
         break
     except ValueError:
         print("Please, insert an integer.")
@@ -41,10 +44,45 @@ print("")
 
 while True:
     try:
-        replacedID = int(input("Insert the ID of the icon you want to replace: "))
+        replaced_id = int(input("Insert the ID of the icon you want to replace: "))
         break
     except ValueError:
         print("Please, insert an integer.")
         continue
 
 print("")
+
+replaced = str(replaced_id)
+replacing = str(replacing_id)
+# Por ahora voy a copiar "player_01" a "player_02" y player_02 a player_02.bak
+if mode == 1:
+    if replaced_id <= 9:
+        os.rename(path + "/player_0" + replaced + ".png", path + "/player_0" + replaced + ".png.bak")
+        os.rename(path + "/player_0" + replaced + "-hd.png", path + "/player_0" + replaced + "-hd.png.bak")
+        os.rename(path + "/player_0" + replaced + "-uhd.png", path + "/player_0" + replaced + "-uhd.png.bak")
+
+        os.rename(path + "/player_0" + replaced + ".plist", path + "/player_0" + replaced + ".plist.bak")
+        os.rename(path + "/player_0" + replaced + "-hd.plist", path + "/player_0" + replaced + "-hd.plist.bak")
+        os.rename(path + "/player_0" + replaced + "-uhd.plist", path + "/player_0" + replaced + "-uhd.plist.bak")
+
+    elif replaced_id >= 10:
+        os.rename(path + "/player_" + replaced + ".png", path + "/player_" + replaced + ".png.bak")
+        os.rename(path + "/player_" + replaced + "-hd.png", path + "/player_" + replaced + "-hd.png" + ".bak")
+        os.rename(path + "/player_" + replaced + "-uhd.png", path + "/player_" + replaced + "-uhd.png" + ".bak")
+
+        os.rename(path + "/player_0" + replaced + ".plist", path + "/player_0" + replaced + ".plist.bak")
+        os.rename(path + "/player_0" + replaced + "-hd.plist", path + "/player_0" + replaced + "-hd.plist.bak")
+        os.rename(path + "/player_0" + replaced + "-uhd.plist", path + "/player_0" + replaced + "-uhd.plist.bak")
+"""""
+    if replacing_id <= 9 and replaced_id <= 9:
+      shutil.copy(path + "/player_0" + replacing, path + "/player_0", replaced)
+
+    elif replacing_id >= 10 and replaced_id >= 10:
+        shutil.copy(path + "/player_" + replacing, path + "/player_" + replaced)
+
+    elif replacing_id <= 9 and replaced_id >= 10:
+        shutil.copy(path + "/player_0" + replacing, path + "/player_" + replaced)
+
+    elif replacing_id >= 10 and replaced_id <= 9:
+        shutil.copy(path + "/player_" + replacing, path + "/player_0" + replaced)
+        """""
