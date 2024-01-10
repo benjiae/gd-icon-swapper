@@ -15,7 +15,8 @@ I saw on twitter people saying that "icon hack is not purely cosmetic because it
 For this, you can either clone the repository (which will get you a .py file), or download the release (which will leave you with either a .py file or a .exe file)
 
 #### 2. Running
-Copy your icons folder (located on ```Geometry Dash/Resources```) to the same directory as the script, then run it, it will give instructions
+Copy your icons folder (located on ```Geometry Dash/Resources```) to the same directory as the script, then run it, it will give instructions.\
+For finding the IDs you may want to use [GDColon's online Icon Kit](https://gdbrowser.com/iconkit/)
 
 ## Troubleshooting
 ### The .exe doesn't open!
