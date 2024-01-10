@@ -1,7 +1,17 @@
 import os
 import shutil
 
-path = "icons_test"
+path = "icons_test/"
+path_backup = "icons_test/backups/"
+
+
+if not os.path.isdir(path):
+    print("no icons folder, creating one")
+    os.mkdir(path)
+
+if not os.path.isdir(path_backup):
+    print("no backups folder, creating one")
+    os.mkdir(path_backup)
 
 print("")
 print("Thanks for trying this tool!")
@@ -52,34 +62,80 @@ while True:
 
 print("")
 
-if replacing_id <= 9:
+if replaced_id <= 9:
     replaced = "0" + str(replaced_id)
 else:
     replaced = str(replaced_id)
 
+if replacing_id <= 9:
+    replacing = "0" + str(replacing_id)
+else:
+    replacing = str(replacing_id)
+
 match mode:
     case 1:
-        mode_string = "player"
+        mode_string = "player_"
     case 2:
-        mode_string = "ship"
+        mode_string = "ship_"
     case 3:
-        mode_string = "player_ball"
+        mode_string = "player_ball_"
     case 4:
-        mode_string = "bird"
+        mode_string = "bird_"
     case 5:
-        mode_string = "robot"
+        mode_string = "robot_"
     case 6:
-        mode_string = "spider"
+        mode_string = "spider_"
     case 7:
-        mode_string = "swing"
+        mode_string = "swing_"
     case 8:
-        mode_string = "jetpack"
+        mode_string = "jetpack_"
 
-    #png
-os.rename(path + "/" + mode_string + "_" + replaced + ".png", path + "/" + mode_string + "_" + replaced + ".png.bak")
-os.rename(path + "/" + mode_string + "_" + replaced + "-hd.png", path + "/" + mode_string + "_" + replaced + "-hd.png.bak")
-os.rename(path + "/" + mode_string + "_" + replaced + "-uhd.png", path + "/" + mode_string + "_" + replaced + "-uhd.png.bak")
-    #plist
-os.rename(path + "/" + mode_string + "_" + replaced + ".plist", path + "/" + mode_string + "_" + replaced + ".plist.bak")
-os.rename(path + "/" + mode_string + "_" + replaced + "-hd.plist", path + "/" + mode_string + "_" + replaced + "-hd.plist.bak")
-os.rename(path + "/" + mode_string + "_" + replaced + "-uhd.plist", path + "/" + mode_string + "_" + replaced + "-uhd.plist.bak")
+### Renaming the original files
+os.rename(path + mode_string + replaced + ".png", path_backup + mode_string + replaced + ".png")
+os.rename(path + mode_string + replaced + ".plist", path_backup + mode_string + replaced + ".plist")
+
+os.rename(path + mode_string + replaced + "-hd.png", path_backup + mode_string + replaced + "-hd.png")
+os.rename(path + mode_string + replaced + "-hd.plist", path_backup + mode_string + replaced + "-hd.plist")
+
+os.rename(path + mode_string + replaced + "-uhd.png", path_backup + mode_string + replaced + "-uhd.png")
+os.rename(path + mode_string + replaced + "-uhd.plist", path_backup + mode_string + replaced + "-uhd.plist")
+
+### Copying the replacement files
+
+shutil.copyfile(path + mode_string + replacing + ".png", path + mode_string + replaced + ".png")
+shutil.copyfile(path + mode_string + replacing + ".plist", path + mode_string + replaced + ".plist")
+
+shutil.copyfile(path + mode_string + replacing + "-hd.png", path + mode_string + replaced + "-hd.png")
+shutil.copyfile(path + mode_string + replacing + "-hd.plist", path + mode_string + replaced + "-hd.plist")
+
+shutil.copyfile(path + mode_string + replacing + "-uhd.png", path + mode_string + replaced + "-uhd.png")
+shutil.copyfile(path + mode_string + replacing + "-uhd.plist", path + mode_string + replaced + "-uhd.plist")
+
+### Editing the plist files
+
+## low quality
+with open(path + mode_string + replaced + ".plist", 'r') as file:
+    filedata = file.read()
+
+    filedata = filedata.replace(mode_string + replacing, mode_string + replaced)
+
+with open(path + mode_string + replaced + ".plist", 'w') as file:
+    file.write(filedata)
+
+## medium quality
+with open(path + mode_string + replaced + "-hd.plist", 'r') as file:
+    filedata = file.read()
+
+    filedata = filedata.replace(mode_string + replacing, mode_string + replaced)
+
+with open(path + mode_string + replaced + "-hd.plist", 'w') as file:
+    file.write(filedata)
+    
+## high quality
+with open(path + mode_string + replaced + "-uhd.plist", 'r') as file:
+    filedata = file.read()
+
+    filedata = filedata.replace(mode_string + replacing, mode_string + replaced)
+
+with open(path + mode_string + replaced + "-uhd.plist", 'w') as file:
+    file.write(filedata)
