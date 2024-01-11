@@ -18,18 +18,19 @@ while True:
     print("2: Ship")
     print("3: Ball")
     print("4: UFO")
-    print("5: Robot")
-    print("6: Spider")
-    print("7: Swing")
-    print("8: Jetpack")
+    print("5: Wave")
+    print("6: Robot")
+    print("7: Spider")
+    print("8: Swing")
+    print("9: Jetpack")
 
     while True:
         try:
-            mode = int(input("Insert a number (1-8): "))
-            if 1 <= mode <= 8:
+            mode = int(input("Insert a number (1-9): "))
+            if 1 <= mode <= 9:
                 break
             else:
-                print("Please, insert a number between 1-8")
+                print("Please, insert a number between 1 and 9")
                 continue
         except ValueError:
             print("Please, insert an integer")
@@ -78,12 +79,14 @@ while True:
         case 4:
             mode_string = "bird_"
         case 5:
-            mode_string = "robot_"
+            mode_string = "dart_"
         case 6:
-            mode_string = "spider_"
+            mode_string = "robot_"
         case 7:
-            mode_string = "swing_"
+            mode_string = "spider_"
         case 8:
+            mode_string = "swing_"
+        case 9:
             mode_string = "jetpack_"
 
     print("Moving original files to backups folder...")
